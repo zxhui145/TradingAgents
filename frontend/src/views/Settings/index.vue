@@ -42,6 +42,10 @@
                 <el-icon><Lock /></el-icon>
                 <span>安全设置</span>
               </el-menu-item>
+              <el-menu-item index="tags">
+                <el-icon><CollectionTag /></el-icon>
+                <span>标签管理</span>
+              </el-menu-item>
             </template>
 
             <!-- 系统配置菜单 -->
@@ -378,6 +382,10 @@
         </el-card>
 
 
+        <!-- 标签管理 -->
+        <el-card v-show="activeTab === 'tags'" class="settings-content" shadow="never">
+          <TagsManagement />
+        </el-card>
       </el-col>
     </el-row>
 
@@ -450,8 +458,10 @@ import {
   Coin,
   Document,
   Refresh,
-  DataAnalysis
+  DataAnalysis,
+  CollectionTag
 } from '@element-plus/icons-vue'
+import TagsManagement from './TagsManagement.vue'
 
 const router = useRouter()
 const route = useRoute()

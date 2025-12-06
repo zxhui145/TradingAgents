@@ -56,6 +56,16 @@
     </el-menu-item>
     -->
 
+<el-menu-item index="/backtest">
+      <el-icon><DataLine /></el-icon>
+      <template #title>回测</template>
+    </el-menu-item>
+    <el-menu-item index="/pattern">
+      <el-icon><DataAnalysis /></el-icon>
+      <template #title>模式挖掘</template>
+    </el-menu-item>
+
+
     <el-sub-menu index="/settings">
       <template #title>
         <el-icon><Setting /></el-icon>
@@ -119,6 +129,11 @@ const route = useRoute()
 const appStore = useAppStore()
 
 const activeMenu = computed(() => route.path)
+// 添加 TrendCharts 图标导入
+import { TrendCharts } from '@element-plus/icons-vue'
+// 添加 DataAnalysis 图标导入
+import { DataAnalysis } from '@element-plus/icons-vue'
+import { DataLine } from '@element-plus/icons-vue'
 </script>
 
 <style lang="scss" scoped>

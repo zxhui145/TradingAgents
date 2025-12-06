@@ -653,7 +653,7 @@ class TushareSyncService:
 
                     # 记录请求参数
                     logger.debug(
-                        f"🔍 {symbol}: 请求{period_name}数据 "
+                        f"🔍 {symbol}: 开始请求历史数据：{period_name}数据 "
                         f"start={symbol_start_date}, end={end_date}, period={period}"
                     )
 
@@ -674,14 +674,14 @@ class TushareSyncService:
                         # 计算单个股票耗时
                         stock_duration = (datetime.now() - stock_start_time).total_seconds()
                         logger.info(
-                            f"✅ {symbol}: 保存 {records_saved} 条{period_name}记录，"
+                            f"✅ {symbol}: 开始保存历史数据，共 {records_saved} 条{period_name}记录，"
                             f"总耗时 {stock_duration:.2f}秒 "
                             f"(API: {api_duration:.2f}秒, 保存: {save_duration:.2f}秒)"
                         )
                     else:
                         stock_duration = (datetime.now() - stock_start_time).total_seconds()
                         logger.warning(
-                            f"⚠️ {symbol}: 无{period_name}数据 "
+                            f"⚠️ {symbol}: 无{period_name}历史数据 "
                             f"(start={symbol_start_date}, end={end_date})，耗时 {stock_duration:.2f}秒"
                         )
 
@@ -822,8 +822,8 @@ class TushareSyncService:
                             return list_date.strftime('%Y-%m-%d')
 
                     # 如果没有上市日期，从1990年开始
-                    logger.warning(f"⚠️ {symbol}: 未找到上市日期，从1990-01-01开始同步")
-                    return "1990-01-01"
+                    logger.warning(f"⚠️tushare_sync_service: {symbol}: 未找到上市日期，从1990-01-01开始同步")
+                    return "2000-01-01"
 
             # 默认返回30天前（确保不漏数据）
             return (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')

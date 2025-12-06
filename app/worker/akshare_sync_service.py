@@ -740,8 +740,8 @@ class AKShareSyncService:
                             return list_date.strftime('%Y-%m-%d')
 
                     # 如果没有上市日期，从1990年开始
-                    logger.warning(f"⚠️ {symbol}: 未找到上市日期，从1990-01-01开始同步")
-                    return "1990-01-01"
+                    logger.warning(f"⚠️ arkshare_sync_service:{symbol}: 未找到上市日期，从1990-01-01开始同步")
+                    return "2000-01-01"
 
             # 默认返回30天前（确保不漏数据）
             return (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')

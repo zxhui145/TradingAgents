@@ -27,7 +27,7 @@ from pathlib import Path
 from app.core.config import settings
 from app.core.database import init_db, close_db
 from app.core.logging_config import setup_logging
-from app.routers import auth_db as auth, analysis, screening, queue, sse, health, favorites, config, reports, database, operation_logs, tags, tushare_init, akshare_init, baostock_init, historical_data, multi_period_sync, financial_data, news_data, social_media, internal_messages, usage_statistics, model_capabilities, cache, logs
+from app.routers import auth_db as auth, analysis, screening, queue, sse, health, favorites, config, reports, database, operation_logs, tags, tushare_init, akshare_init, baostock_init, historical_data, multi_period_sync, financial_data, news_data, social_media, internal_messages, usage_statistics, model_capabilities, cache, logs, trend,pattern, backtest
 from app.routers import sync as sync_router, multi_source_sync
 from app.routers import stocks as stocks_router
 from app.routers import stock_data as stock_data_router
@@ -68,6 +68,9 @@ from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
 from app.services.quotes_ingestion_service import QuotesIngestionService
 from app.routers import paper as paper_router
+
+
+logger = logging.getLogger(__name__)
 
 
 def get_version() -> str:
@@ -726,6 +729,10 @@ app.include_router(financial_data.router, tags=["financial-data"])
 app.include_router(news_data.router, tags=["news-data"])
 app.include_router(social_media.router, tags=["social-media"])
 app.include_router(internal_messages.router, tags=["internal-messages"])
+app.include_router(trend.router, prefix="/api/trend", tags=["trend-analysis"])
+app.include_router(pattern.router, prefix="/api/pattern", tags=["pattern"])
+app.include_router(backtest.router, tags=["backtest"])
+logger.info(f"Registered routers: {[route.path for route in app.routes]}")
 
 
 @app.get("/")

@@ -383,6 +383,29 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/backtest',
+    name: 'Backtest',
+    component: () => import('@/layouts/BasicLayout.vue'),
+    meta: {
+      title: '回测',
+      icon: 'DataLine',
+      requiresAuth: true,
+      transition: 'slide-up'
+    },
+    children: [
+      {
+        path: '',
+        name: 'BacktestHome',
+        component: () => import('@/views/Backtest/index.vue'),
+        meta: {
+          title: '回测',
+          requiresAuth: true
+        }
+      }
+    ]
+  },
+
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/views/Error/404.vue'),
@@ -391,6 +414,48 @@ const routes: RouteRecordRaw[] = [
       hideInMenu: true,
       requiresAuth: true
     }
+  },
+  {
+    path: '/pattern',
+    name: 'Pattern',
+    component: () => import('@/layouts/BasicLayout.vue'),
+    meta: {
+      title: '模式挖掘',
+      icon: 'CreditCard',
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: '',
+        name: 'PatternHome',
+        component: () => import('@/views/PatternView/PatternView.vue'),
+        meta: {
+          title: '模式挖掘',
+          requiresAuth: true
+        }
+      }
+    ]
+  },
+  {
+    path: '/trend-analysis',
+    name: 'TrendAnalysis',
+    component: () => import('@/layouts/BasicLayout.vue'),
+    meta: {
+      title: '趋势分析',
+      icon: 'TrendCharts',
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: '',
+        name: 'TrendAnalysisHome',
+        component: () => import('@/views/PatternView/TrendAnalysis.vue'),
+        meta: {
+          title: '趋势分析',
+          requiresAuth: true
+        }
+      }
+    ]
   }
 ]
 

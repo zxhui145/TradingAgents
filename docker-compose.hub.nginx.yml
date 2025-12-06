@@ -38,6 +38,10 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    command: 
+      - "--bind_ip_all"    # 允许所有IP连接
+      - "--auth"           # 启用认证
+  
 
   # Redis缓存
   redis:
@@ -71,6 +75,8 @@ services:
     image: hsliup/tradingagents-backend:latest
     container_name: tradingagents-backend
     restart: unless-stopped
+    ports:
+    - "8000:8000"  # 添加这一行，映射宿主机8000到容器8000
     expose:
       - "8000"
     volumes:
@@ -179,7 +185,7 @@ services:
     container_name: tradingagents-nginx
     restart: unless-stopped
     ports:
-      - "80:80" 
+      - "8081:80" 
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
